@@ -8,4 +8,3 @@ Installation:
 2) Edit src/index.js and src/App.js to point to the token server
 3) npm install; npm start
 
-# uxKitExample

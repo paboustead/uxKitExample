@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Dolby Voice Conference</title>
+
+
+    <!-- Bootstrap core CSS -->
+  <link href="bootstrap.css" rel="stylesheet" crossorigin="anonymous">
+
+
+  <script>
+	function connect() {
+		if (hide_conf)
+		{
+			var user = document.getElementById("yourName").value
+			window.location.href = "https://www.dlbtest.com/uxkit?conference="+conference+"&name="+user;
+		}
+		else
+		{
+			var conf = document.getElementById("yourConference").value
+			var user = document.getElementById("yourName").value
+			window.location.href = "https://www.dlbtest.com/uxkit?conference="+conf+"&name="+user;
+		}
+        }
+	    function getUrlVars() {
+		    var vars = {};
+		    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+		    	vars[key] = value;
+    		    });
+		    return vars;
+		}
+
+	function getUrlParam(parameter, defaultvalue){
+		var urlparameter = defaultvalue;
+		if(window.location.href.indexOf(parameter) > -1){
+			urlparameter = getUrlVars()[parameter];
+        	}
+		return urlparameter;
+	}
+
+	defaultConference='Conference Name';
+	name = getUrlParam('name','Your Name');
+	conference = getUrlParam('conference',defaultConference);
+	if (conference.localeCompare(defaultConference) !=0)
+		hide_conf=true;
+	else
+		hide_conf=false;
+
+  </script>
+
+  <link href="signin.css" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root" style="visibility: hidden"> </div>
+    <form class="form-signin">
+      <img class="mb-4" src="dolby.png" alt="" width="300" height="339">
+         <h1 class="h3 mb-3 font-weight-normal" id="title">Enter Conference Details</h1>
+      <label for="yourName" class="sr-only">Your Name</label>
+      <input type="text" id="yourName" class="form-control" required autofocus>
+      <label for="yourConference" id="clabel" class="sr-only">Conference Name</label>
+      <input type="text" id="yourConference" class="form-control" required>
+      <button class="btn btn-lg btn-primary btn-block" type="button" onclick="connect()">Join</button>
+	<script>
+		        document.getElementById("yourName").placeholder = name;
+       			document.getElementById("yourConference").placeholder = conference;
+			if (hide_conf) {
+				document.getElementById("clabel").style.visibility = "hidden";
+				document.getElementById("yourConference").style.visibility = "hidden";
+				document.getElementById("title").innerHTML = "Conference Name: "+conference;
+			}
+	</script>
+    </form>
+  </body>
+</html>
+~
